@@ -1,4 +1,4 @@
-# Implementation of Merge Sort Algorithm
+# Implementation of Merge Sort Algorithm 1
 def merge_sort(unsortedList):
     # If the length of the list is 1, print it and exit
     if len(unsortedList) == 1:
@@ -35,8 +35,23 @@ def merge_sort(unsortedList):
             k += 1
 
 
+# Implementation of Merge Sort Algorithm 2
+
+def merge_sorts(unsortedList):
+    def merge_list(leftSideArray, rightSideArray):
+        sorted_array = []
+        while leftSideArray and rightSideArray:
+            sorted_array.append(
+                (leftSideArray if leftSideArray[0] <= rightSideArray[0] else rightSideArray).pop(0))
+        return sorted_array + leftSideArray + rightSideArray
+    if len(unsortedList) <= 1:
+        return unsortedList
+    midTerm = len(unsortedList) // 2
+    return merge_list(merge_sorts(unsortedList[:midTerm]), merge_sorts(unsortedList[midTerm:]))
+
+
 if __name__ == "__main__":
     user_input = input("Enter the list of numbers: \n").strip()
     unsortedArray = [int(item) for item in user_input.split(",")]
-    merge_sort(unsortedArray)
-    print(unsortedArray)
+    print(merge_sorts(unsortedArray))
+    # print(unsortedArray)
