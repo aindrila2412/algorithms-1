@@ -35,4 +35,4 @@ def karatsuba(a, b):
     return int(k * (int(math.pow(10, (m * 2)))) + e * (int(math.pow(10, m))) + l)
 
 
-print(karatsuba(20, 100))
+print(karatsuba(2, 1))
