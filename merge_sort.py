@@ -54,4 +54,4 @@ if __name__ == "__main__":
     user_input = input("Enter the list of numbers: \n").strip()
     unsortedArray = [int(item) for item in user_input.split(",")]
     print(merge_sorts(unsortedArray))
-    # print(unsortedArray)
+    # print(unsortedArray)m
