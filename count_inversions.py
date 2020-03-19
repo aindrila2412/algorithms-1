@@ -71,9 +71,8 @@ def mergeSortInversions(toDoArray):
             rightElementArray)
         newArray = []
         i, j = 0, 0
-
+        # Initial inverison count and keep track of the returned inversion count
         inversion_count = 0 + inv_count_left + inv_count_right
-
         while i < len(leftElementArray) and j < len(rightElementArray):
             if leftElementArray[i] <= rightElementArray[j]:
                 newArray.append(leftElementArray[i])
@@ -81,7 +80,9 @@ def mergeSortInversions(toDoArray):
             else:
                 newArray.append(rightElementArray[j])
                 j += 1
+                # Increment the inversion count
                 inversion_count += len(leftElementArray) - i
+                # inversion_count += 1
         newArray += leftElementArray[i:]
         newArray += rightElementArray[j:]
     return newArray, inversion_count
