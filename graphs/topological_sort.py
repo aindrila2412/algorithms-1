@@ -1,4 +1,4 @@
-# Implementation of Depth First search
+# Implementation of Topological Sort using DFS
 
 """
     Using a stack and set
