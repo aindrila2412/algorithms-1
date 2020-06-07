@@ -1,4 +1,4 @@
-# Implementation of Breadth First search
+# Implementation of Depth First search
 
 """
     Using a stack
