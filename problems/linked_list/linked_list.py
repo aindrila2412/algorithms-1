@@ -168,6 +168,107 @@ class LinkedList:
 		self.head = _reverse_nodes_recursive(current = self.head, previous = None)
 
 	# Merge two sorted linked lists 
+	def merge_nodes(self, llist):
+		p = self.head 
+		q = llist.head
+		s = None 
+
+		if not p:
+			return q
+		if not q:
+			return p 
+
+		if p and q:
+			if p.data <= q.data:
+				s = p
+				p = s.next
+			else:
+				s = q 
+				q = s.next 
+			new_head = s 
+		while p and q:
+			if p.data <= q.data:
+				s.next = p 
+				s = p 
+				p = s.next 
+			else:
+				s.next = q
+				s = q 
+				q = s.next 
+		if not p:
+			s.next = q
+		if not q:
+			s.next = p 
+		return new_head
+
+	# Merge two sorted linked lists using divide and conquer 
+	def merge_nodes_divide_and_conquer(self, llist):
+		p = self.head 
+		q = llist.head 
+		s = None 
+
+		if not p:
+			return q 
+		if not q:
+			return p
+
+		while p and q:
+			if p.data <= q.data:
+				p.next = self.merge_nodes_divide_and_conquer(p.next, q)
+				return p 
+			else:
+				q.next = self.merge_nodes_divide_and_conquer(p, q.next)
+				return q 
+
+	# Remove duplicates from a linked list 
+	def remove_duplicates(self):
+		current = self.head 
+		previous = None 
+		check_items = {}
+
+		while current:
+			if current.data in check_items:
+				previous.next = current.next 
+				current = None 
+			else:
+				check_items[current.data] = 1
+				previous = current 
+			current = previous.next
+
+	# Get the N-th element from the end of the linked list 
+	# Method 1
+	def get_nth_last_node(self, nth):
+		count = self.count_nodes_iterative()
+		current = self.head 
+		while current:
+			if count == nth:
+				print(current.data)
+				return current.data 
+			count -= 1
+			current = current.next 
+		if current is None:
+			return 
+
+	# Method 2
+	def get_nth_node_without_count(self, nth):
+		p = self.head 
+		q = self.head 
+		count = 0
+		while q:
+			count += 1
+			if count >= nth:
+				break 
+			q = q.next 
+
+		if not q:
+			print(str(nth) + "is greater than the number of nodes in the list")
+		while p and q.next:
+			q = q.next 
+			p = p.next 
+		return p.data
+
+
+
 	
 
 
