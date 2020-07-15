@@ -267,6 +267,72 @@ class LinkedList:
 			p = p.next 
 		return p.data
 
+	# Count the number of occurances of nodes in the linked list 
+	def count_occurances(self):
+		check_items = {}
+		current = self.head 
+
+		while current:
+			if current.head in check_items:
+				check_items[current.head] += 1
+				current = current.next
+			else:
+				check_items[current.head] = 1
+				current = current.next
+
+	# Count occurance of a specific node value in a linked list (iterative approach) 
+	def count_occurance_by_node_iterative(self, val):
+		count = 0
+		current = self.head 
+
+		while current:
+			if current.data == val:
+				count += 1
+			current = current.next 
+		return count 
+
+	# Count occurance of a specific node value in a linked list (recursive approach)
+	def count_occurance_by_node_recursive(self, val, node):
+		if not node:
+			return 0
+		if node.data == val:
+			return 1 + self.count_occurance_by_node_recursive(val, node.next)
+		else:
+			return self.count_occurance_by_node_recursive(val, node.next)
+
+	# Rotate the nodes of the linked list k times from the right 
+	def rotate(self, k):
+		# Rotate only if we have more than 1 element 
+		if self.head and self.head.next:
+			p = self.head 
+			q = self.head 
+			current = self.head 
+			count = 0
+			previous = None 
+
+			while current:
+				count += 1
+				current = current.next 
+			if count > 0:
+				k %= count
+
+			while p and count >= k + 1:
+				previous = p 
+				p = p.next 
+				q = q.next 
+				count -= 1
+			p = previous 
+
+			while q:
+				previous = q 
+				q = q.next 
+			q = previous 
+
+			q.next = self.head 
+			self.head = p.next 
+			p.next = None 
+		
+
 
 
 	
@@ -296,6 +362,13 @@ llist.print_list()
 
 # print ('\n')
 # print(llist.count_nodes_recursion(llist.head))
-print('\n')
-llist.swap_nodes('A', 'x')
-llist.print_list()
+# print('\n')
+# llist.swap_nodes('A', 'x')
+# llist.print_list()
+
+# print(llist_2.count_occurences_iterative(1))
+# print(llist_2.count_occurences_recursive(llist_2.head, 1))
+# print('\n\n')
+# llist.rotate(21)
+# llist.print_list()
+
