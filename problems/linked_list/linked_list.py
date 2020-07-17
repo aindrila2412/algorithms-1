@@ -331,20 +331,74 @@ class LinkedList:
 			q.next = self.head 
 			self.head = p.next 
 			p.next = None 
-		
 
+	# Check if the linked list is a palindrome
 
+	##########################################
+	# USING STRING
+	##########################################
+	def check_palindrome_string(self):
+		s = ""
+		current = self.head 
+		while current:
+			s += str(current.data)
+			current = current.next 
+		# print(s)
+		return s == s[::-1]
 
-	
+	##########################################
+	# USING STACKS
+	##########################################
+	def check_palindrome_stack(self):
+		stack = []
+		current = self.head 
+
+		# Add values to the stack 
+		while current:
+			stack.append(current.data)
+			current = current.next
+		current = self.head
+		# Loop again and check if the values are same 
+		while current:
+			data = stack.pop()
+			print(data, current.data)
+			if data != current.data:
+				return False 
+			current = current.next 
+		return True
+
+	##########################################
+	# USING TWO POINTERS
+	##########################################
+	def check_palindrome_two_pointers(self):
+		if self.head:
+			p = self.head 
+			q = self.head 
+			stack = []
+			i = 0
+			while p:
+				stack.append(p)
+				p = p.next 
+				i += 1
+
+			count = 1
+			while count <= i//2 + 1:
+				if stack[-count].data != q.data:
+					return False 
+				q = q.next 
+				count += 1
+			return True 
+		else:
+			return True
 
 
 llist = LinkedList()
-llist.append('T')
-llist.append('A')
-llist.append('B')
-llist.append('C')
-llist.append('x')
-llist.append('ahah')
+llist.append(1)
+llist.append(2)
+llist.append(4)
+llist.append(4)
+llist.append(2)
+llist.append(1)
 llist.print_list()
 # print('\n')
 # llist.prepend('J')
@@ -371,4 +425,5 @@ llist.print_list()
 # print('\n\n')
 # llist.rotate(21)
 # llist.print_list()
+print(llist.check_palindrome_two_pointers())
 
