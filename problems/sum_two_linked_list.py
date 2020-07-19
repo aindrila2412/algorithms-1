@@ -35,7 +35,7 @@ def sum_two_lists(self, llist):
 
     while p or q:
     	if not p:
-    		a = 0
+    		a = 0 
     	else:
     		a = p.data 
     	if not q:
