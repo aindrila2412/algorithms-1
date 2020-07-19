@@ -118,6 +118,7 @@ class Circular_Linked_List:
 		new_list.print_list()
 
 
+
 cllist = Circular_Linked_List()
 cllist.append("C")
 cllist.append("D")
