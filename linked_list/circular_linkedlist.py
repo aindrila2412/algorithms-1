@@ -1,5 +1,13 @@
 '''
 	Implementation of Circular Linked List
+
+	Methods includes:
+		- Create the circular linked list 
+		- Append item to the list 
+		- Prepend item to the list
+		- Print out the entire list 
+		- Remove nodes from the circular linked list 
+		- Split the list into two halves
 '''
 class Node:
 	def __init__(self, data):
@@ -73,12 +81,50 @@ class Circular_Linked_List:
 						previous.next = current.next 
 						current = current.next
 
+	# Get the length of the circular linked list
+	def circular_length(self):
+		current = self.head 
+		previous = None 
+		count = 0
+		while current:
+			count += 1
+			current = current.next 
+			if current == self.head:
+				break
+		return count
+
+	# Split the list into two halves 
+	def split_list(self):
+		current = self.head 
+		list_size = self.circular_length()
+		mid_size = list_size // 2
+		counter = 0
+
+		while current and counter < mid_size:
+			previous = current 
+			current = current.next 
+			counter += 1
+
+		previous.next = self.head 
+
+		new_list = Circular_Linked_List()
+
+		while current.next != self.head:
+			new_list.append(current.data)
+			current = current.next 
+		new_list.append(current.data)
+		self.print_list()
+		print('\n')
+		new_list.print_list()
+
 
 cllist = Circular_Linked_List()
 cllist.append("C")
 cllist.append("D")
 cllist.prepend("B")
 cllist.prepend("A")
-cllist.print_list()
-cllist.remove_nodes("A")
-cllist.print_list()
+# cllist.print_list()
+# cllist.remove_nodes("A")
+# cllist.print_list()
+# print(cllist.circular_length())
+cllist.split_list()
