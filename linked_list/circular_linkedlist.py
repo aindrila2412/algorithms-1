@@ -8,6 +8,8 @@
 		- Print out the entire list 
 		- Remove nodes from the circular linked list 
 		- Split the list into two halves
+		- Josephus circle method
+		- Check if the linked list is circular
 '''
 class Node:
 	def __init__(self, data):
@@ -151,6 +153,17 @@ class Circular_Linked_List:
 			print('KILL: ' + str(current.data))
 			self.remove_josephus_node(current)
 			current = current.next
+
+	# Check for circular linked list 
+	def check_circular_linked_list(self):
+        current = self.head
+        while current.next:
+            if current.next == self.head:
+                return True 
+            current = current.next
+        return False
+
+
 
 
 cllist = Circular_Linked_List()
