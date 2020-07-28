@@ -6,7 +6,8 @@
 		- Append to the list 
 		- Prepend to the list 
 		- Print the doubly linked list 
-		- Add nodes in the middle of the linked list 
+		- Add node after a node in the middle of the linked list 
+		- Add node before a node in the middle of the linked list 
 
 '''
 class Node:
@@ -53,8 +54,8 @@ class DoublyLinkedList:
 			print(current.data)
 			current = current.next 
 
-	# Add node to the middle of the doubly linked list 
-	def add_to_middle(self, key, data):
+	# Add node after a node in the middle of the doubly linked list 
+	def add_after_node(self, key, data):
 		current = self.head
 		while current:
 			if current.next is None and current.data == key:
@@ -70,6 +71,23 @@ class DoublyLinkedList:
 				return
 
 			current = current.next 
+	# Add node before a node in the middle of a doubly linked list
+	def add_before_node(self, key, data):
+		current = self.head 
+		while current:
+			if current.next is None and current.data == key:
+				self.prepend(data)
+				return
+			elif current.data == key:
+				new_node = Node(data)
+				temp_prev = current.prev
+				temp_prev.next = new_node 
+				current.prev = new_node 
+				new_node.next = current 
+				new_node.prev = temp_prev
+				return
+			
+			current = current.next 
 				
 
 doubleList = DoublyLinkedList()
@@ -79,6 +97,9 @@ doubleList.prepend(2)
 doubleList.prepend(3)
 doubleList.print_list()
 print("\n")
-doubleList.add_to_middle(2, 6)
+# doubleList.add_after_node(2, 6)
+# doubleList.print_list()
+doubleList.add_before_node(2, 6)
 doubleList.print_list()
+
 
