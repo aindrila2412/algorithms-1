@@ -13,7 +13,7 @@
 			- Deleting the head node 
 			- Deleting the last node 
 			- Deleting a middle node 
-		- 
+		- Reverse the doubly linked list 
 '''
 class Node:
 	def __init__(self, data):
@@ -137,6 +137,19 @@ class DoublyLinkedList:
 					return
 			current = current.next 
 
+	# Reverse the doubly linked list 
+	def reverse(self):
+		current = self.head
+		temp = None 
+		while current:
+			temp = current.prev 
+			current.prev = current.next 
+			current.next = temp 
+			current = current.prev  
+		if temp:
+			self.head = temp.prev 
+
+
 
 doubleList = DoublyLinkedList()
 doubleList.append(0)
@@ -151,7 +164,10 @@ doubleList.append(3)
 # doubleList.print_list()
 # doubleList.add_before_node(2, 6)
 # doubleList.print_list()
-doubleList.delete_node(3)
+# doubleList.delete_node(3)
+doubleList.print_list()
+doubleList.reverse()
+print('\n')
 doubleList.print_list()
 
 
