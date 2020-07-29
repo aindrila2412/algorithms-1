@@ -14,6 +14,7 @@
 			- Deleting the last node 
 			- Deleting a middle node 
 		- Reverse the doubly linked list 
+		- Remove the duplicate nodes from the doubly linked list 
 '''
 class Node:
 	def __init__(self, data):
@@ -95,8 +96,8 @@ class DoublyLinkedList:
 			
 			current = current.next 
 
-	# Delete a node from the lis t
-	def delete_node(self, key):
+	# Delete a node from the list using node data
+	def delete_using_node_data(self, key):
 		current = self.head 
 		while current:
 			
@@ -149,13 +150,67 @@ class DoublyLinkedList:
 		if temp:
 			self.head = temp.prev 
 
+	# Delete the node using node 
+	def delete_using_node(self, node):
+		current = self.head 
+		while current:
+			
+			if current == node and current == self.head:
+				# Deleting the only node in the list
+				if not current.next:
+					current = None 
+					self.head = None 
+					return
+
+				# Deleting the head node of the list 
+				else:
+					temp_next = current.next 
+					temp_next.prev = None 
+					current.next = None 
+					current = None
+					self.head = temp_next
+					return  
+
+			# Remove the middle node from the doubly linked list 
+			elif current == node:
+				if current.next:
+					prev_temp = current.prev
+					next_temp = current.next
+					prev_temp.next = next_temp
+					next_temp.prev = prev_temp
+					current.prev = None 
+					current.next = None 
+					current = None 
+					return
+
+				# Removing the last node from the doubly linked list 
+				else: 	
+					prev_temp = current.prev 
+					prev_temp.next = None 
+					current.prev = None 
+					current = None 
+					return
+			current = current.next
+	# Remove the duplicate nodes from the doubly linked list 	
+	def remove_duplicates(self):
+		check_dict = {}
+		current = self.head
+		while current:
+			if current.data not in check_dict:
+				check_dict[current.data] = 1
+				current = current.next 
+			else:
+				temp = current.next 
+				self.delete_using_node(current)
+				current = temp 
+
 
 
 doubleList = DoublyLinkedList()
 doubleList.append(0)
 doubleList.append(1)
 doubleList.append(2)
-doubleList.append(3)
+doubleList.append(1)
 # doubleList.prepend(2)
 # doubleList.prepend(3)
 # doubleList.print_list()
@@ -164,10 +219,10 @@ doubleList.append(3)
 # doubleList.print_list()
 # doubleList.add_before_node(2, 6)
 # doubleList.print_list()
-# doubleList.delete_node(3)
-doubleList.print_list()
-doubleList.reverse()
-print('\n')
-doubleList.print_list()
+# doubleList.delete_using_node_data(3)
+# doubleList.reverse()
+# doubleList.print_list()
+# doubleList.remove_duplicates()
+# doubleList.print_list()
 
 
