@@ -8,7 +8,12 @@
 		- Print the doubly linked list 
 		- Add node after a node in the middle of the linked list 
 		- Add node before a node in the middle of the linked list 
-
+		- Delete a node
+			- Deleting the only node present 
+			- Deleting the head node 
+			- Deleting the last node 
+			- Deleting a middle node 
+		- 
 '''
 class Node:
 	def __init__(self, data):
@@ -71,6 +76,7 @@ class DoublyLinkedList:
 				return
 
 			current = current.next 
+
 	# Add node before a node in the middle of a doubly linked list
 	def add_before_node(self, key, data):
 		current = self.head 
@@ -88,18 +94,64 @@ class DoublyLinkedList:
 				return
 			
 			current = current.next 
-				
+
+	# Delete a node from the lis t
+	def delete_node(self, key):
+		current = self.head 
+		while current:
+			
+			if current.data == key and current == self.head:
+				# Deleting the only node in the list
+				if not current.next:
+					current = None 
+					self.head = None 
+					return
+
+				# Deleting the head node of the list 
+				else:
+					temp_next = current.next 
+					temp_next.prev = None 
+					current.next = None 
+					current = None
+					self.head = temp_next
+					return  
+
+			# Remove the middle node from the doubly linked list 
+			elif current.data == key:
+				if current.next:
+					prev_temp = current.prev
+					next_temp = current.next
+					prev_temp.next = next_temp
+					next_temp.prev = prev_temp
+					current.prev = None 
+					current.next = None 
+					current = None 
+					return
+
+				# Removing the last node from the doubly linked list 
+				else: 	
+					prev_temp = current.prev 
+					prev_temp.next = None 
+					current.prev = None 
+					current = None 
+					return
+			current = current.next 
+
 
 doubleList = DoublyLinkedList()
 doubleList.append(0)
 doubleList.append(1)
-doubleList.prepend(2)
-doubleList.prepend(3)
-doubleList.print_list()
-print("\n")
+doubleList.append(2)
+doubleList.append(3)
+# doubleList.prepend(2)
+# doubleList.prepend(3)
+# doubleList.print_list()
+# print("\n")
 # doubleList.add_after_node(2, 6)
 # doubleList.print_list()
-doubleList.add_before_node(2, 6)
+# doubleList.add_before_node(2, 6)
+# doubleList.print_list()
+doubleList.delete_node(3)
 doubleList.print_list()
 
 
