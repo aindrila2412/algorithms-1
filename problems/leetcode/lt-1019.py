@@ -26,7 +26,9 @@ class Solution:
         stack = []
         finalList = [0] * len(valueList)
         
+        # Looping with index, value
         for i, e in enumerate(valueList):
+            # Check if the stack is not empty, 
             while stack and valueList[stack[-1]] < e:
                 finalList[stack.pop()] = e
                 
