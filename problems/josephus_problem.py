@@ -1,5 +1,17 @@
 # An implementation of Josephus Problem
 
+# Get the length of the circular linked list
+def circular_length(self):
+	current = self.head 
+	previous = None 
+	count = 0
+	while current:
+		count += 1
+		current = current.next 
+		if current == self.head:
+			break
+	return count
+
 def remove_josephus_node(self, node):
 	if self.head:
 		# If the node is the head node
