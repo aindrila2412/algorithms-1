@@ -1,10 +1,12 @@
 """
 Given two sorted arrays, A and B, determine their intersection. 
 What elements are common to A and B?
+Consider for both sorted and unsorted arrays
 """
 
-# Method 1
-# Considering the arrays are sorted 
+# Method 1 (SORTED ARRAYS)
+# Considering the arrays are sorted
+# Time complexity: O(n)
 def array_intersection(nums1, nums2):
 	i, j = 0, 0
 	intersection = list()
@@ -26,6 +28,23 @@ def array_intersection(nums1, nums2):
 		else:
 			j += 1
 	return intersection
+
+
+# Method 2 (UNSORTED ARRAYS)
+# Here arrays are not sorted, we will use two sets 
+# Time complexity: O(m + n) where m and n are length of arrays 
+def array_intersection(nums1, nums2):
+	def get_intersecting_elements(setA, setB):
+		return [x for x in setA if x in setB]
+
+	setA = set(nums1)
+	setB = set(nums2)
+
+	if len(setA) < len(setB):
+		return get_intersecting_elements(setA, setB)
+	else:
+		return get_intersecting_elements(setB, setA)
+
 
 
 # Method 2 (Using in-built methods)
