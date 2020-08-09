@@ -47,8 +47,8 @@ def array_intersection(nums1, nums2):
 
 
 
-# Method 2 (Using in-built methods)
-# def array_intersection(nums1, nums2):
-# 	print(set(nums1).intersection(nums2))
+# Method 3 (Using in-built methods)
+def array_intersection(nums1, nums2):
+	print(set(nums1).intersection(nums2))
 
 array_intersection([3, 3, 7, 15, 31], [2, 3, 3, 5, 7, 11])
