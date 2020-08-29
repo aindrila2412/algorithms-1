@@ -7,6 +7,9 @@
 		> Pre-order
 		> Post-order
 	- Level Order traversal
+	- Reverse Level order traversal
+	- Height of a tree
+
 """
 
 class Node(object):
@@ -140,6 +143,18 @@ class BinaryTree(object):
 		return traversal
 
 
+	# Calculating the height of the binary tree 
+	def height_tree(self, node):
+		if node is None:
+			return -1 
+		left_node_height = self.height_tree(node.left)
+		right_node_height = self.height_tree(node.right)
+
+		return 1 + max(left_node_height, right_node_height)
+
+
+
+
 tree = BinaryTree(1)
 tree.root.left = Node(2)
 tree.root.right = Node(3)
@@ -152,6 +167,7 @@ print(tree.print_tree('inorder'))
 print(tree.print_tree('postorder'))
 print(tree.print_tree('levelorder'))
 print(tree.print_tree('reverse_levelorder_traversal'))
+print(tree.height_tree(tree.root))
 
 
 
