@@ -23,5 +23,11 @@ def size_tree(self, start):
 	return count
 
 
+# Recursive approach
+def size_tree(self, node):
+	if node is None:
+		return 0 
+
+	return 1 + self.size_tree(node.left) + self.size_tree(node.right)
 
 	
