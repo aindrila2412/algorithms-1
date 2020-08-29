@@ -6,7 +6,7 @@
 		> In-order
 		> Pre-order
 		> Post-order
-	-
+	- Level Order traversal
 """
 
 class Node(object):
@@ -14,6 +14,42 @@ class Node(object):
 		self.value = value
 		self.left = None 
 		self.right = None 
+
+"""
+Implementation of Queue 
+"""
+class Queue(object):
+	def __init__(self):
+		self.items = []
+
+	def enqueue(self, item):
+		self.items.insert(0, item)
+
+	def dequeue(self):
+		if not self.is_empty():
+			return self.items.pop()
+
+	def add(self, item):
+		self.items.append(item)
+
+	def is_empty(self):
+		return len(self.items) == 0
+
+	def peek(self):
+		if not self.is_empty():
+			return self.items[-1].value
+
+	def __len__(self):
+		return self._size()
+
+	def _size(self):
+		return len(self.items)
+
+	def print_items(self):
+		for i in self.items:
+			print(i)
+
+""" Binary Tree """
 
 class BinaryTree(object):
 	def __init__(self, root):
@@ -26,6 +62,8 @@ class BinaryTree(object):
 			return self.inorder_traversal(tree.root, "")
 		if ttype == "postorder":
 			return self.postorder_traversal(tree.root, "")
+		if ttype == "levelorder":
+			return self.level_order_traversal(tree.root)
 
 	# Pre-order traversal
 	def preorder_traversal(self, start, traversal):
@@ -54,7 +92,26 @@ class BinaryTree(object):
 			traversal += (str(start.value) + '-')
 		return traversal
 
+	# Level Order Traversal of Binary Tree
 
+	""" Implementing the Level order traversal """
+	def level_order_traversal(self, start):
+		if start is None:
+			return 
+
+		queue = Queue()
+		queue.enqueue(start)
+		traversal = ""
+
+		while len(queue) > 0:
+			traversal += (str(queue.peek()) + "-")
+
+			node = queue.dequeue()
+			if node.left:
+				queue.enqueue(node.left)
+			if node.right:
+				queue.enqueue(node.right)
+		return traversal
 
 
 
@@ -69,5 +126,6 @@ tree.root.right.right = Node(7)
 print(tree.print_tree('preorder'))
 print(tree.print_tree('inorder'))
 print(tree.print_tree('postorder'))
+print(tree.print_tree('levelorder'))
 
 
