@@ -3,7 +3,8 @@
 """
 	- Implementation of BST
 	- Insertion of node
-	- 
+	- Traversing BST using pre order traversal
+	- Searching in BST
 
 """
 class Node(object):
@@ -33,6 +34,7 @@ class BST(object):
 			else:
 				current.left = Node(val)
 
+	# Traversing the BST 
 	def traverse(self, start, traversal):
 		""" Pre order traversal """
 		if start:
@@ -40,6 +42,24 @@ class BST(object):
 			traversal = self.traverse(start.left, traversal)
 			traversal = self.traverse(start.right, traversal)
 		return traversal
+
+	# Searching in BST
+	def search_BST(self, val):
+		return self.search_BST_helper(self.root, val)
+
+	def search_BST_helper(self, current, val):
+		if current:
+			if current.data == val:
+				return True
+			elif current.data < val:
+				return self.search_BST_helper(current.right, val)
+			else:
+				return self.search_BST_helper(current.left, val)
+		return False
+
+
+
+
 
 
 tree = BST(8)
@@ -50,3 +70,4 @@ tree.root.left.right = Node(6)
 
 tree.insert_node(9)
 print(tree.traverse(tree.root, ""))
+print(tree.search_BST(12))
