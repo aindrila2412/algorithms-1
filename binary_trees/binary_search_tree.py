@@ -5,6 +5,7 @@
 	- Insertion of node
 	- Traversing BST using pre order traversal
 	- Searching in BST
+	- Checking the BST property holds
 
 """
 class Node(object):
@@ -20,7 +21,10 @@ class BST(object):
 
 	# Insertion of node in a Binary Search tree
 	def insert_node(self, val):
-		self.insert_helper(self.root, val)
+		if self.root is None:
+			self.root = Node(val)
+		else:
+			self.insert_helper(self.root, val)
 
 	def insert_helper(self, current, val):
 		if current.data < val:
@@ -28,11 +32,13 @@ class BST(object):
 				self.insert_helper(current.right, val)
 			else:
 				current.right = Node(val)
-		else:
+		elif current.data > val:
 			if current.left:
 				self.insert_helper(current.left, val)
 			else:
 				current.left = Node(val)
+		else:
+			print('Value already exists!!')
 
 	# Traversing the BST 
 	def traverse(self, start, traversal):
@@ -45,7 +51,13 @@ class BST(object):
 
 	# Searching in BST
 	def search_BST(self, val):
-		return self.search_BST_helper(self.root, val)
+		if self.root:
+			found = self.search_BST_helper(self.root, val)
+
+			if found:
+				return True
+			else:
+				return False
 
 	def search_BST_helper(self, current, val):
 		if current:
@@ -57,9 +69,29 @@ class BST(object):
 				return self.search_BST_helper(current.left, val)
 		return False
 
+	# Check if the BST holds true
+	def check(self):
+		def helper(node, lower=float('-inf'), upper=float('inf')):
+			if not node:
+				return True 
 
+			val = node.data 
 
+			if val <= lower or val >= upper:
+				return False
 
+			# val is passed as lower, because all the children in the right subtree
+			# should be greater than that
+			if not helper(node.right, val, upper):
+				return False 
+			# val is passed as upper, because all the children in the left subtree
+			# should be smaller than that
+			if not helper(node.left, lower, val):
+				return False 
+
+			return True
+			
+		return helper(self.root)
 
 
 tree = BST(8)
@@ -71,3 +103,4 @@ tree.root.left.right = Node(6)
 tree.insert_node(9)
 print(tree.traverse(tree.root, ""))
 print(tree.search_BST(12))
+print(tree.check())
