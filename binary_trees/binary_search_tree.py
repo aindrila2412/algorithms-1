@@ -6,6 +6,7 @@
 	- Traversing BST using pre order traversal
 	- Searching in BST
 	- Checking the BST property holds
+	- Delete element from BST
 
 """
 class Node(object):
@@ -93,14 +94,63 @@ class BST(object):
 			
 		return helper(self.root)
 
+	# Delete element from Binary Seach Tree
+	def delete_node(self, target):
+		def find_max(node):
+			while node.right:
+				node = node.right 
+			return node.data
 
-tree = BST(8)
-tree.root.left = Node(3)
-tree.root.right = Node(10)
-tree.root.left.left = Node(1)
-tree.root.left.right = Node(6)
+		def delete_node_helper(target, node):
+			# If node is null 
+			if node is not None:
+				# If target is smaller than the node, move left 
+				if target < node.data:
+					node.left = delete_node_helper(target, node.left)
+				elif target > node.data:
+					node.right = delete_node_helper(target, node.right)
+				else:
+					# Node is found,
+					# Check if the node has 2 children nodes 
+					if node.left and node.right:
+						# Replace current node with predecessor data (can also work around successor - right )
+						node.data = find_max(node.left)
+						node.left = delete_node_helper(node.data, node.left)
 
-tree.insert_node(9)
+						# with successor 
+						# node.data = find_max(node.right)
+						# node.right = delete_node_helper(node.data, node.right)
+					else:
+						# If there is a single child node,
+						# Return whichever present
+						node = node.left or node.right
+
+			return node
+
+		delete_node_helper(target, self.root)
+
+
+tree = BST(50)
+tree.root.left = Node(40)
+tree.root.right = Node(70)
+tree.root.left.left = Node(20)
+tree.root.left.right = Node(45)
+tree.root.left.left.left = Node(10)
+tree.root.left.left.right = Node(30)
+tree.root.left.left.left.left = Node(5)
+tree.root.left.left.left.right = Node(15)
+tree.root.left.left.left.right.left = Node(7)
+tree.root.left.left.left.right.right = Node(18)
+tree.root.left.left.left.left.left = Node(3)
+tree.root.left.left.left.left.right = Node(8)
+tree.root.right.left = Node(60)
+tree.root.right.right = Node(99)
+
+# tree.insert_node(9)
 print(tree.traverse(tree.root, ""))
-print(tree.search_BST(12))
-print(tree.check())
+# print(tree.search_BST(12))
+# print(tree.check())
+tree.delete_node(20)
+
+print(tree.traverse(tree.root, ""))
+
