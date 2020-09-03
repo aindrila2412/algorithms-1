@@ -9,8 +9,8 @@ def int_sq_root(k):
 	while low <= high:
 		mid = (low + high) // 2
 		mid_squared = mid * mid
-		if mid_squared > k:
-			high = mid - 1
+		if mid_squared <= k:
+			high = mid + 1
 		else:
-			low = mid + 1
+			low = mid - 1
 	return low - 1
