@@ -12,4 +12,4 @@ def spreadsheet_encoding(val_str):
 		count -= 1
 	return value 
 
-print(spreadsheet_encoding('AZZZ'))
+print(spreadsheet_encoding('ABC'))
