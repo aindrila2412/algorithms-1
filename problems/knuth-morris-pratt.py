@@ -54,7 +54,7 @@ def kmp(substring, text):
     return False
 
 text = "abxabcabcaby"
-substring = "abcaby"
+substring = "ll"
 test_array = [None] * len(substring) 
 getArray(substring)
 print(kmp(substring, text))
