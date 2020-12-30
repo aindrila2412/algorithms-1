@@ -15,11 +15,13 @@ def iterative_binary_search(arr, target):
 	while low <= high:
 		mid = (low + high) // 2
 		if target == arr[mid]:
+			print(mid)
 			return True
 		elif target < mid:
 			high = mid - 1
 		else:
 			low = mid + 1
+
 	return False
 
 # Recursive approach
