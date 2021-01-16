@@ -7,6 +7,8 @@
     Output: 6
     Explanation:  After 6 moves, the array could be [3, 4, 1, 2, 5, 7].
     It can be shown with 5 or less moves that it is impossible for the array to have all unique values.
+
+    Solution: Increment each duplicate element with maximum value of its own value + 1 and previous element's value
 """
 class Solution:
     def minIncrementForUnique(self, A: List[int]) -> int:
@@ -22,7 +24,7 @@ class Solution:
                 
         return (sum(check_arr) - sum_A)
          
-        #O (mn) => won't work
+        # O(mn) => won't work 
         # if len(A) < 1:
         #     return 0
         # A.sort()
