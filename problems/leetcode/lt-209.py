@@ -17,7 +17,7 @@ class Solution:
                 min_length = min(min_length, i + 1 - left)
                 temp_sum -= nums[left]
                 left += 1
-            
+        # return min_length if min_length < len(nums) + 1 else 0
         if min_length != float('inf'):
             return min_length
         else:
