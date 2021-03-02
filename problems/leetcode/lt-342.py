@@ -13,4 +13,12 @@ class Solution:
             num = num >> 2
             count += 2
         return (num << count) == n
+
+        # O(1) solution
+        # Make sure only 1 set bit is there and %3 always give 1
+        return (num > 0) and ((num & (num - 1)) == 0) and (num % 3 == 1)
+
+        # Another O(1) solution as 10101010 (set bits are on odd places only in power of 2)
+        # Make sure only 1 bit is set and that bit is on the odd place
+        return (num > 0) and ((num & (num - 1)) == 0) and (num & 0xaaaaaaaa  == 0)
         
