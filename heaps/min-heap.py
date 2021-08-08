@@ -1,7 +1,9 @@
 '''
     1. Create a min heap
     2. Insert into the min heap
-    3. Heapify the min heap
+    3. Heapify the min heap upwards 
+    4. Heapify the min heap downwards
+    5. Delete from the min-heap 
 
 '''
 class MinHeap:
@@ -128,6 +130,16 @@ class MinHeap:
         self.heapifyDown_recursive(0)
         return data
 
+    def delete_element(self, index):
+        if self.size == 0:
+            raise('Heap is Empty')
+        data = self.storage[index]
+        self.storage[index] = self.storage[self.size - 1]
+        self.size -= 1
+        self.heapifyUp_recursive(index)
+        self.heapifyDown_recursive(index)
+        return data 
+
 
     def print_heap(self):
         print(self.storage)    
@@ -149,4 +161,6 @@ print(x.size)
 x.insert_iterative(0)
 x.print_heap()
 x.remove_min_recursive()
+x.print_heap()
+x.delete_element(4)
 x.print_heap()
