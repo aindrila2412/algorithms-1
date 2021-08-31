@@ -10,8 +10,48 @@
     Input: arr = [1,2,3,4,5], k = 4, x = 3
     Output: [1,2,3,4]
 """
+class MaxHeap:
+    def __init__(self, values=None):
+        if values is None:
+            self.values = []
+        else:
+            self.values = values
+            heapq.heapify(self.values)
+    
+    def push(self, value):
+        heapq.heappush(self.values, value)
+
+    def pop(self):
+        return heapq.heappop(self.values)
+
+    def top(self):
+        return self.values[0]
+
+    def replace(self, val):
+        heapq.heapreplace(self.values, val)
+        
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        # Method 1: Using Heaps
+        def kClosestElements(values, k, x):
+            arr = MaxHeap()
+            final = []
+
+            for i, val in enumerate(values):
+                temp = abs(val - x)
+                if len(arr.values) > k - 1 and arr.top()[0] < -temp: 
+                    arr.replace((-temp, val))
+                elif len(arr.values) < k:
+                    arr.push((-temp, val))
+
+            while len(arr.values) > 0:
+                temp = arr.pop()
+                final.append(temp[1])
+            return sorted(final)
+
+        return kClosestElements(arr, k, x)
+        
+        # Method 2: Using Binary Search
         # Find the nearest left and right elements to x using binary search or using bisect method 
         low = 0 
         left, right = None, None 
