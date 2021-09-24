@@ -18,7 +18,7 @@ def sort_array(values):
         return values
     k = values[-1]
     # Store the last index value in a temporary variable
-    sort_array(values[:-1])
+    # sort_array(values[:-1])
     # Pop the last element from the value list 
     values.pop()
     # Recursively call the sort_array function with the updated value to sort the remaining array
