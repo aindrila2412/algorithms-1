@@ -1,4 +1,4 @@
-# Generate all permutations 
+# Generate permutations with a space 
 def permutation_with_space_helper(input_val, output_val):
     if len(input_val) == 0:
         # Base condition to get a final output once the input string is empty
@@ -14,8 +14,9 @@ def permutation_with_space_helper(input_val, output_val):
 def  permutation_with_space(input_val):
     output_val = ""
     # Calling the helper function
-    permutation_with_space_helper(input_val[1:], input_val[0])
+    for i in range(len(input_val)):
+        permutation_with_space_helper(input_val[:i] + input_val[i+1:], input_val[i])
 
 final = []
-permutation_with_space('abcd')
+permutation_with_space('abc')
 print(final)
