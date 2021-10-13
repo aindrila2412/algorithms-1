@@ -7,5 +7,5 @@ def gen_permutations(values, left, right = ""):
             gen_permutations(values, left[:i] + left[i+1:], right + left[i])
 
 values = []
-gen_permutations(values, 'abcdefghijk')
+gen_permutations(values, 'abcd')
 print(values)
