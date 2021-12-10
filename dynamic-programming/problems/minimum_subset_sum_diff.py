@@ -13,7 +13,7 @@ def minimum_subset_sum_diff(values, max_sum):
                 dp[i][j] = 0
             if j == 0:
                 dp[i][j] = 1
-
+    # Return the last row of the dp table
     for i in range(1, len(values) + 1):
         for j in range(1, max_sum + 1):
             if values[i - 1] <= j:
